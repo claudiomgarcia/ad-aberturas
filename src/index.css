@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.itemDetail {
+  width: 100%;
+  text-align: center;
+}
+
+.mainContainer {
+  width: 100%;
+  display: grid;
+  place-content: center;
+}
+
+h1{
+  text-align: center;
+}
+
+.cardItem {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  row-gap: 20px;
+  padding: 5px;
+}
+
+.linkDetails {
+  color:white;
+  text-decoration: none;
+}
+
+.linkDetails:hover{
+  color:white;
+  text-decoration: none;
+}
