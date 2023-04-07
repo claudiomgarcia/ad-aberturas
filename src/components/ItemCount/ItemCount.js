@@ -20,10 +20,10 @@ const ItemCount = ({ stock = 0, initial = 1, onAdd }) => {
         <div>
             <div className="mb-2">
                 <Button variant="success" size="sm" onClick={decrement}>-</Button>
-                <span >{quantity}</span>
+                <span className='p-1'>{quantity}</span>
                 <Button variant="success" size="sm" onClick={increment}>+</Button>
             </div>
-            <div>
+            <div className='pb-3'>
                 <Button variant="success" size="sm" onClick={() => onAdd(quantity)}>Agregar al carrito</Button>
             </div>
         </div>
