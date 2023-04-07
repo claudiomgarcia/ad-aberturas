@@ -21,7 +21,6 @@ const ItemDetail = ({ id, name, price, img, category, description, stock }) => {
         <div className='itemDetail'>
             <h2>{name}</h2>
             <img src={img} alt={name} style={{ width: 400 }} />
-            <h4>Categoria: ${category}</h4>
             <h3>Precio: ${price}</h3>
             <div>Descripción: {description}</div>
             {
