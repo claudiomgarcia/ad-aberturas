@@ -9,7 +9,7 @@ import logo from '../../logo.png';
 const NavBar = () => {
     return (
         <header>
-            <Navbar key={"expand"} expand={"md"} bg={"light"} variant={"light"} className="mb-3">
+            <Navbar key={"expand"} expand={"md"} bg={"success"} variant={"dark"} className="mb-3">
                 <Container fluid>
                     <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
                     <a href="/">
@@ -22,7 +22,7 @@ const NavBar = () => {
                     >
                         <Offcanvas.Header closeButton>
                             <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-                                AD Aberturas
+                                <img className="header__logo" src={logo} alt="Ad Aberturas" />
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
