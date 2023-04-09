@@ -27,8 +27,10 @@ const ItemDetail = ({ id, name, price, img, category, description, stock }) => {
         <div>
             <Container>
                 <Row>
-                    <Col><img src={img} alt={name} style={{ width: '30rem' }} /></Col>
-                    <Col>
+                    <Col sm>
+                        <img src={img} alt={name} style={{ width: '100%' }} />
+                    </Col>
+                    <Col sm>
                         <h3>{name}</h3>
                         <h5>Precio: $ {price}</h5>
                         Stock: {stock}
