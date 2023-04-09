@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { getProducts, getProductsByCategory } from "../../asyncMock"
 import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
-
+import { getDocs, collection, query, where } from 'firebase/firestore'
+import { db } from '../../services/firebase/firebaseConfig'
 
 const ItemListContainer = ({ greeting }) => {
     const [products, setProducts] = useState([])
@@ -13,15 +13,21 @@ const ItemListContainer = ({ greeting }) => {
     const { categoryId } = useParams()
 
     useEffect(() => {
-        const asyncFunction = categoryId ? getProductsByCategory : getProducts
+        const productsRef = categoryId 
+            ? query(collection(db, 'products'), where('category', '==', categoryId))
+            : collection(db, 'products')
 
-        asyncFunction(categoryId)
-            .then(products => {
-                setProducts(products)
+        getDocs(productsRef)
+            .then(snapshot => {
+                const productsAdapted = snapshot.docs.map(doc => {
+                    const data = doc.data()
+                    return { id: doc.id, ...data }
+                })
+
+                setProducts(productsAdapted)
             })
             .catch(error => {
-                console.log(error)
-                setError(true)
+                console.log(error);
             })
             .finally(() => {
                 setLoading(false)
@@ -30,7 +36,7 @@ const ItemListContainer = ({ greeting }) => {
 
     if (loading) {
         return (
-            <div className="text-center">
+            <div className='pt-5 text-center'>
                 <Spinner animation="border" role="status" />
             </div>
         )
