@@ -6,12 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { CartProvider } from './context/CartContext';
 import { Notification, NotificationProvider } from './notification/NotificationService'
+import Footer from './components/Footer/Footer';
 
 const App = () => {
   return (
     <div>
-      <NotificationProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <NotificationProvider>
           <CartProvider>
             <NavBar />
             <Routes>
@@ -20,9 +21,10 @@ const App = () => {
               <Route path='/category/:categoryId/subcategory/:subcategoryId' element={<ItemListContainer greeting={'Productos filtrados por categoria'} />} />
               <Route path='/item/:itemId' element={<ItemDetailContainer />} />
             </Routes>
+            <Footer/>
           </CartProvider>
-        </BrowserRouter>
-      </NotificationProvider>
+        </NotificationProvider>
+      </BrowserRouter>
     </div>
   )
 }
