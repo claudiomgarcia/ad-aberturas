@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 import { getDocs, collection, query, where } from 'firebase/firestore'
 import { db } from '../../services/firebase/firebaseConfig'
+
+const ItemListMemo = memo(ItemList)
 
 const ItemListContainer = ({ greeting }) => {
     const [products, setProducts] = useState([])
@@ -54,7 +56,7 @@ const ItemListContainer = ({ greeting }) => {
         <div className="text-center pt-3 pb-5">
             <h1>{greeting}</h1>
             <div className='pt-5'>
-                <ItemList products={products} />
+                <ItemListMemo products={products} />
             </div>
         </div>
     )

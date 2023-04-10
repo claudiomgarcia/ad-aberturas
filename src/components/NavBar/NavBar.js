@@ -30,10 +30,10 @@ const NavBar = () => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Brand>
                     <Link to='/'><img className="header__logo" src={logo} alt="Ad Aberturas" /></Link>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="justify-content-center flex-grow-1 pe-3 gap-md-5">
                         <NavLink to='/' className='nav-link'>Inicio</NavLink>
@@ -44,9 +44,9 @@ const NavBar = () => {
                                 )
                             })
                         }
-                    </Nav>
-                    <Navbar.Brand href="#"><CartWidget /></Navbar.Brand>
+                    </Nav>                
                 </Navbar.Collapse>
+                <CartWidget />
             </Container>
         </Navbar >
     )
