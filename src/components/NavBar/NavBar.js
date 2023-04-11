@@ -7,10 +7,12 @@ import logo from '../../logo.png';
 import { useEffect, useState } from "react";
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import { db } from "../../services/firebase/firebaseConfig";
+import { useAuth } from '../../context/AuthContext'
+import Button from 'react-bootstrap/esm/Button';
 
 const NavBar = () => {
     const [categories, setCategories] = useState([])
-
+    const { user } = useAuth()
 
     useEffect(() => {
         const categoriesRef = query(collection(db, 'categories'), orderBy('order'))
@@ -44,9 +46,15 @@ const NavBar = () => {
                                 )
                             })
                         }
-                    </Nav>                
+                    </Nav>
                 </Navbar.Collapse>
-                <CartWidget />
+                {
+                    user ? (
+                    <CartWidget />
+                    ) : (
+                        <NavLink to='/login' className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}><Button variant='success'>Login</Button></NavLink>
+                    )
+                }
             </Container>
         </Navbar >
     )

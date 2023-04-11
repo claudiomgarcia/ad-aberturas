@@ -4,15 +4,19 @@ import { CartContext } from '../../context/CartContext'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useAuth } from '../../context/AuthContext';
+import { NavLink } from 'react-router-dom';
+import Button from 'react-bootstrap/esm/Button';
 
 const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
     const [quantity, setQuantity] = useState(0)
     const { addItem } = useContext(CartContext)
-
-
+    const { user } = useAuth()
+    console.log(quantity)
+    
     const handleOnAdd = (quantity) => {
         const productToAdd = {
-            id, name, price, quantity, stock
+            id, name, price, quantity, stock, img, description
         }
         setQuantity(quantity)
         addItem(productToAdd)
@@ -27,10 +31,27 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                     </Col>
                     <Col sm>
                         <h3>{name}</h3>
-                        <h5>Precio: $ {price}</h5>                        
+                        <h5>Precio: $ {price}</h5>
                         <div className='pb-3'>Descripción: {description}</div>
                         <div className='pb-5'>
-                            { stock > 0 ? <ItemCount onAdd={handleOnAdd} stock={stock} />  : <div>Sin stock disponible</div> }
+                            {
+                                user ? (
+                                    stock > 0 ? (
+                                        <ItemCount onAdd={handleOnAdd} stock={stock} />
+                                    ) : (
+                                        <div>Sin stock disponible</div>
+                                    )
+                                ) : (
+                                    <NavLink
+                                        to="/login"
+                                        className={({ isActive }) => (isActive ? 'ActiveOption' : 'Option')}
+                                    >
+                                        <Button variant="success">Login</Button>
+                                    </NavLink>
+                                )
+                            }
+
+
                         </div>
                     </Col>
                 </Row>
