@@ -38,7 +38,6 @@ export const NotificationProvider = ({ children }) => {
 
     return (
         <NotificationContext.Provider value={{ setNotification }}>
-            {/* {notificationData.text && <Notification {...notificationData}/>} */}
             <Notification {...notificationData} />
             {children}
         </NotificationContext.Provider>

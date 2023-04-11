@@ -27,13 +27,11 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                     </Col>
                     <Col sm>
                         <h3>{name}</h3>
-                        <h5>Precio: $ {price}</h5>
-                        Stock: {stock}
+                        <h5>Precio: $ {price}</h5>                        
                         <div className='pb-3'>Descripción: {description}</div>
                         <div className='pb-5'>
-                            <ItemCount onAdd={handleOnAdd} stock={stock} />
+                            { stock > 0 ? <ItemCount onAdd={handleOnAdd} stock={stock} />  : <div>Sin stock disponible</div> }
                         </div>
-
                     </Col>
                 </Row>
             </Container>
