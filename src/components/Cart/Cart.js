@@ -3,10 +3,11 @@ import { CartContext } from "../../context/CartContext"
 import { Link } from "react-router-dom"
 import { Button } from 'react-bootstrap';
 import './Cart.css'
+import { useNotification } from "../../notification/NotificationService"
 
 const Cart = () => {
-
-    const { cart, totalQuantity, total } = useContext(CartContext);
+    const { setNotification } = useNotification()
+    const { cart, totalQuantity, total, removeItem } = useContext(CartContext);
 
     return (
         <div className='pt-3'>
@@ -34,7 +35,7 @@ const Cart = () => {
                                                                     <div className="col-md-8">
                                                                         <div className="info">
                                                                             <div className="row">
-                                                                                <div className="col-md-5 product-name">
+                                                                                <div className="col-md-4 product-name">
                                                                                     <div className="product-name">
                                                                                         {prod.name}
                                                                                         <div className="product-info">
@@ -42,11 +43,17 @@ const Cart = () => {
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div className="col-md-4 quantity">
+                                                                                <div className="col-md-3 quantity">
                                                                                     <label>Cantidad: {prod.quantity}</label>
                                                                                 </div>
                                                                                 <div className="col-md-3 price">
                                                                                     <span>$ {prod.price}</span>
+                                                                                </div>
+                                                                                <div className="col-md-2">
+                                                                                    <Button variant="secondary" size="sm" onClick={() => {
+                                                                                        setNotification('success', `Se eliminó correctamente ${prod.quantity} ${prod.name}`, 2)
+                                                                                        removeItem(prod.id)
+                                                                                    }}>Eliminar</Button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>

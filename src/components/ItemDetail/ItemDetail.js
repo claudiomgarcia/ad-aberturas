@@ -7,13 +7,16 @@ import Col from 'react-bootstrap/Col';
 import { useAuth } from '../../context/AuthContext';
 import { NavLink } from 'react-router-dom';
 import Button from 'react-bootstrap/esm/Button';
+import { useNotification } from "../../notification/NotificationService"
 
 const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
     const [quantity, setQuantity] = useState(0)
-    const { addItem } = useContext(CartContext)
+    const { addItem, removeItem, isInCart } = useContext(CartContext)
+    const { setNotification } = useNotification()
     const { user } = useAuth()
+    const showDeleteButton = isInCart(id)
     console.log(quantity)
-    
+
     const handleOnAdd = (quantity) => {
         const productToAdd = {
             id, name, price, quantity, stock, img, description
@@ -37,7 +40,22 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                             {
                                 user ? (
                                     stock > 0 ? (
-                                        <ItemCount onAdd={handleOnAdd} stock={stock} />
+                                        <div>
+                                            {showDeleteButton ? (
+                                                <div>
+                                                    En carrito: {quantity}
+                                                    <div>
+                                                    <Button variant="secondary" size="sm" onClick={() => {
+                                                        setNotification('success', `Se eliminó correctamente ${quantity} ${name}`, 2)
+                                                        removeItem(id)
+                                                    }}>Eliminar</Button>
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <ItemCount onAdd={handleOnAdd} stock={stock} />
+                                            )}
+
+                                        </div>
                                     ) : (
                                         <div>Sin stock disponible</div>
                                     )

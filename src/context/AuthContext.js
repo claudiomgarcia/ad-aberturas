@@ -1,6 +1,5 @@
 import { useState, createContext, useContext } from "react";
 import { useNotification } from "../notification/NotificationService";
-
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext()
@@ -17,7 +16,7 @@ export const AuthProvider = ({ children }) => {
         //guardar los datos del usuario en una coleccion, para despues poder utilizar el uuid y agregarlo a la orden de compras.
         setUser({ username })
         navigate('/')
-        setNotification('success', `Bienvendio ${username}`, 5)
+        setNotification('success', `Bienvenido ${username}`, 3)
     }
 
     const logout = () => {

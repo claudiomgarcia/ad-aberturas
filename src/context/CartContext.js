@@ -12,19 +12,18 @@ export const CartProvider = ({ children }) => {
     const addItem = (productToAdd) => {
         if (!isInCart(productToAdd.id)) {
             setCart(prev => [...prev, productToAdd])
+            setNotification('success', `Se agregó correctamente ${productToAdd.quantity} ${productToAdd.name}`, 2)
         } else {
             const updatedCart = cart.map(prod => {
                 if (prod.id === productToAdd.id) {
                     let newQuantity = prod.quantity + productToAdd.quantity
                     if (newQuantity > prod.stock) {
                         newQuantity = prod.stock
-                        setNotification('success', `El stock disponible es de ${prod.stock}`, 1)
+                        setNotification('success', `El stock disponible es de ${prod.stock}`, 2)
                     } else {
-                        setNotification('success', `Se agrego correctamente ${productToAdd.quantity} ${productToAdd.name}`, 1)
+                        setNotification('success', `Se agregó correctamente ${productToAdd.quantity} ${productToAdd.name}`, 2)
                     }
-
                     return { ...prod, quantity: newQuantity }
-
                 } else {
                     return prod
                 }
@@ -68,7 +67,7 @@ export const CartProvider = ({ children }) => {
     }
 
     return (
-        <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart }}>
+        <CartContext.Provider value={{ cart, addItem, removeItem, totalQuantity, total, clearCart,isInCart }}>
             {children}
         </CartContext.Provider>
     )
