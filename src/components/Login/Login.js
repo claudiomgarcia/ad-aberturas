@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { useAuth } from "../../context/AuthContext"
-import Form from 'react-bootstrap/Form';
-import { Button } from "react-bootstrap"
+import { Button, Form } from "react-bootstrap"
 
 const Login = () => {
     const [username, setUsername] = useState('')

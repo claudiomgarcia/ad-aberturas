@@ -1,40 +1,16 @@
-import { useEffect, useState, memo } from 'react'
+import { memo } from 'react'
 import ItemList from '../ItemList/ItemList'
 import { useParams } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
-import { getDocs, collection, query, where } from 'firebase/firestore'
-import { db } from '../../services/firebase/firebaseConfig'
-
+import { getProducts } from '../../services/firebase/firestore/products'
+import { useAsync } from '../hooks/useAsync'
 const ItemListMemo = memo(ItemList)
 
 const ItemListContainer = ({ greeting }) => {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
-
     const { categoryId } = useParams()
 
-    useEffect(() => {
-        const productsRef = categoryId 
-            ? query(collection(db, 'products'), where('category', '==', categoryId))
-            : collection(db, 'products')
-
-        getDocs(productsRef)
-            .then(snapshot => {
-                const productsAdapted = snapshot.docs.map(doc => {
-                    const data = doc.data()
-                    return { id: doc.id, ...data }
-                })
-
-                setProducts(productsAdapted)
-            })
-            .catch(error => {
-                console.log(error);
-            })
-            .finally(() => {
-                setLoading(false)
-            })
-    }, [categoryId])
+    const getProductsWithCategory = ()  => getProducts(categoryId)
+    const {data:products, error, loading} = useAsync(getProductsWithCategory, [categoryId])
 
     if (loading) {
         return (

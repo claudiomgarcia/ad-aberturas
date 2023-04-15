@@ -64,6 +64,7 @@ export const CartProvider = ({ children }) => {
 
     const clearCart = () => {
         setCart([])
+        setNotification('success', `Se vació el carrito`, 2)
     }
 
     return (

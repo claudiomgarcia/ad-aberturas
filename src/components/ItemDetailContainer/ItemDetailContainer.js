@@ -1,28 +1,30 @@
-import { useEffect, useState } from "react"
+import Spinner from 'react-bootstrap/Spinner'
 import ItemDetail from '../ItemDetail/ItemDetail'
 import { useParams } from 'react-router-dom'
-import { getDoc, doc } from 'firebase/firestore'
-import { db } from '../../services/firebase/firebaseConfig'
+import { getProductsById } from "../../services/firebase/firestore/products"
+import { useAsync } from "../hooks/useAsync"
 
 const ItemDetailContainer = () => {
-    const [product, setProduct] = useState()
-
     const { itemId } = useParams()
 
+    const getItemDetail = () => getProductsById(itemId)
+    const {data:product, error, loading } = useAsync(getItemDetail, [itemId])
 
-    useEffect(() => {
-        const productRef = doc(db, 'products', itemId)
+    if (loading) {
+        return (
+            <div className='pt-5 text-center'>
+                <Spinner animation="border" role="status" />
+            </div>
+        )
+    }
 
-        getDoc(productRef)
-            .then(snapshot => {
-                const data = snapshot.data()
-                const productAdapted = { id: snapshot.id, ...data }
-                setProduct(productAdapted)
-            }).catch(error => {
-                console.log(error)
-            })
-    }, [itemId])
-
+    if (error) {
+        return (
+            <div className="text-center">
+                <h2>Ocurrió un error en la carga del producto</h2>
+            </div>
+        )
+    }
 
     return (
         <div className="pt-3 pb-5">

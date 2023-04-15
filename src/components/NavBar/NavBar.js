@@ -1,33 +1,25 @@
 import { Link, NavLink } from 'react-router-dom'
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import { Nav, Navbar, Button, Container } from "react-bootstrap";
 import CartWidget from "../CartWidget/CartWidget";
 import logo from '../../logo.png';
 import { useEffect, useState } from "react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { db } from "../../services/firebase/firebaseConfig";
 import { useAuth } from '../../context/AuthContext'
-import Button from 'react-bootstrap/esm/Button';
+import { getCategories } from '../../services/firebase/firestore/categories';
 
 const NavBar = () => {
     const [categories, setCategories] = useState([])
     const { user } = useAuth()
 
     useEffect(() => {
-        const categoriesRef = query(collection(db, 'categories'), orderBy('order'))
-
-        getDocs(categoriesRef)
-            .then(snapshot => {
-                const categoriesAdapted = snapshot.docs.map(doc => {
-                    const data = doc.data()
-
-                    return { id: doc.id, ...data }
-                })
-
-                setCategories(categoriesAdapted)
+        getCategories()
+            .then(categories => {
+                setCategories(categories)
+            })
+            .catch(error => {
+                console.log(error)
             })
     }, [])
+
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -50,7 +42,7 @@ const NavBar = () => {
                 </Navbar.Collapse>
                 {
                     user ? (
-                    <CartWidget />
+                        <CartWidget />
                     ) : (
                         <NavLink to='/login' className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}><Button variant='success'>Login</Button></NavLink>
                     )

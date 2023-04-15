@@ -1,12 +1,9 @@
 import { useContext, useState } from 'react'
 import ItemCount from '../ItemCount/ItemCount'
 import { CartContext } from '../../context/CartContext'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useAuth } from '../../context/AuthContext';
 import { NavLink } from 'react-router-dom';
-import Button from 'react-bootstrap/esm/Button';
 import { useNotification } from "../../notification/NotificationService"
 
 const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
@@ -42,13 +39,11 @@ const ItemDetail = ({ id, name, img, category, description, price, stock }) => {
                                     stock > 0 ? (
                                         <div>
                                             {showDeleteButton ? (
-                                                <div>
-                                                    En carrito: {quantity}
-                                                    <div>
-                                                    <Button variant="secondary" size="sm" onClick={() => {
-                                                        setNotification('success', `Se eliminó correctamente ${quantity} ${name}`, 2)
-                                                        removeItem(id)
-                                                    }}>Eliminar</Button>
+                                                <div>En carrito<div>
+                                                        <Button variant="secondary" size="sm" onClick={() => {
+                                                            setNotification('success', `Se eliminó correctamente ${name}`, 2)
+                                                            removeItem(id)
+                                                        }}>Eliminar</Button>
                                                     </div>
                                                 </div>
                                             ) : (

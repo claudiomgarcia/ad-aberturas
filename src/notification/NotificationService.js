@@ -1,14 +1,16 @@
 import { useState, useContext, createContext } from 'react'
 
 export const Notification = ({ type, text }) => {
+
     const notificationStyle = {
-        position: 'absolute',
+        display: 'inline-block',
+        position: 'fixed',
         top: 200,
         right: 50,
         backgroundColor: type === 'success' ? '#198754' : '#dc3545',
         color: 'white',
         padding: '10px 20px 10px 20px',
-        borderRadius: 10
+        borderRadius: 10,
     }
 
     if (!text) return
