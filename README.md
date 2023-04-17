@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# AD-Aberturas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto se realizó como trabajo final para el curso de ReactJS de Coderhouse, en el cual se utilizó Create-React-App para crear una aplicación web de una tienda de aberturas.
 
-## Available Scripts
+## Instalación
 
-In the project directory, you can run:
+Para instalar y ejecutar el proyecto, se deben seguir los siguientes pasos:
 
-### `npm start`
+-Clonar el repositorio:
+```sh
+git clone https://github.com/claudiomgarcia/ad-aberturas.git
+```
+-Instalar las dependencias:
+```sh
+npm install
+```
+-Crear un archivo .env en la raíz del proyecto con las variables de entorno:
+```sh
+REACT_APP_API_KEY=<API_KEY>
+REACT_APP_AUTH_DOMAIN=<AUTH_DOMAIN>
+REACT_APP_PROJECT_ID=<PROJECT_ID>
+REACT_APP_STORAGE_BUCKET=<STORAGE_BUCKET>
+REACT_APP_MESSAGING_SENDER_ID=<MESSAGING_SENDER_ID>
+REACT_APP_APP_ID=<APP_ID>
+```
+Los valores correspondientes a las credenciales de Firebase deben obtenerse desde la consola de Firebase.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+-Iniciar la aplicación: 
+```sh
+npm start
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Estado del proyecto
+Este proyecto no está en producción y se trata de un proyecto con fines educativos.
 
-### `npm test`
+## Herramientas usadas
+- [Create-React-App](https://create-react-app.dev/)
+- [React-Bootstrap](https://react-bootstrap.github.io/)
+- [Firebase](https://firebase.com)
+- [Vercel](https://vercel.com)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Deployment
+[Ver Deployment](https://ad-aberturas.vercel.app)
