@@ -8,7 +8,7 @@ import { getCategories } from '../../services/firebase/firestore/categories';
 
 const NavBar = () => {
     const [categories, setCategories] = useState([])
-    const { user } = useAuth()
+    const { user, logout } = useAuth()
 
     useEffect(() => {
         getCategories()
@@ -39,12 +39,20 @@ const NavBar = () => {
                             })
                         }
                     </Nav>
+                    {
+                    user &&(
+                        <div className="mb-1">
+                            <Button variant="secondary" size="" className="me-1" onClick={logout}>Logout</Button>
+                        </div>)
+                    }
                 </Navbar.Collapse>
                 {
                     user ? (
-                        <CartWidget />
+                        <div className="mb-1">
+                            <CartWidget />
+                        </div>
                     ) : (
-                        <NavLink to='/login' className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}><Button variant='success'>Login</Button></NavLink>
+                        <NavLink to='/login' className={({ isActive }) => isActive ? 'ActiveOption' : 'Option'}><Button variant='success' className="mb-1">Login</Button></NavLink>
                     )
                 }
             </Container>

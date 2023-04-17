@@ -1,30 +1,75 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import { useNotification } from "../notification/NotificationService";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../services/firebase/firebaseConfig"
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth"
 
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
-    console.log(user)
-
     const navigate = useNavigate()
     const { setNotification } = useNotification()
 
-    const login = (username, password) => {
-        //logica de login, request a una api
-        //guardar los datos del usuario en una coleccion, para despues poder utilizar el uuid y agregarlo a la orden de compras.
-        setUser({ username })
+
+    const register = (email, password) => {
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                navigate('/')
+                setNotification('success', `Usuario creado, bienvenido`, 3)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                setNotification('error', errorMessage, 5)
+            })
+    }
+
+    const login = (email, password) => {
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                setUser({ user })
+                navigate('/')
+                setNotification('success', `Bienvenido ${user.displayName || user.email}`, 3)
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode);
+                setNotification('error', errorMessage, 5)
+            });
+    }
+
+    const loginWithGoogle = async () => {
+        const googleProvider = new GoogleAuthProvider()
+        await signInWithPopup(auth, googleProvider)
         navigate('/')
-        setNotification('success', `Bienvenido ${username}`, 3)
+
     }
 
     const logout = () => {
-        setUser(null)
+        signOut(auth).then(() => {
+            setUser(null)
+            navigate('/')
+            setNotification('success', 'Sesión cerrada', 3)
+        }).catch((error) => {
+            console.log(error);
+        });
     }
 
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            console.log({ currentUser });
+            setUser(currentUser);
+        });
+        return () => unsubscribe();
+    }, []);
+
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, register, login, loginWithGoogle, logout }}>
             {children}
         </AuthContext.Provider>
     )
