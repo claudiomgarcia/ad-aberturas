@@ -42,6 +42,7 @@ const NavBar = () => {
                     {
                     user &&(
                         <div className="mb-1">
+                            <Link to='/myorders'><Button variant="secondary" size="" className="me-1">Mis pedidos</Button></Link>
                             <Button variant="secondary" size="" className="me-1" onClick={logout}>Logout</Button>
                         </div>)
                     }

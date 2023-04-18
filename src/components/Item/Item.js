@@ -9,7 +9,7 @@ const Item = ({ id, name, price, img, stock }) => {
                     <Card.Header><Card.Title>{name}</Card.Title></Card.Header>
                     <Card.Body>
                         <Card.Text>
-                            <img src={img} alt={name} style={{ height: 120 }} />
+                            <Link to={`/item/${id}`}><img src={img} alt={name} style={{ height: 120 }} /></Link>
                         </Card.Text>
                         <Card.Text>
                             ${price}

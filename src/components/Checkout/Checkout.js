@@ -27,6 +27,7 @@ const Checkout = () => {
                 email: buyerData.email,
                 address: buyerData.address
             },
+            buyerId: user.uid,
             items: cart,
             total: total
 
@@ -67,16 +68,16 @@ const Checkout = () => {
                         <div className="d-flex justify-content-center align-items-center pt-3">
                             <Form onSubmit={handleConfirm}>
                                 <Form.Group className="mb-3" controlId="formGroupName">
-                                    <Form.Control type="text" name="name" required placeholder="Nombre y Apellido" value={buyerData.name} onChange={(e) => setBuyerData({ ...buyerData, name: e.target.value })} />
+                                    <Form.Control type="text" name="name" required placeholder="Nombre y Apellido" defaultValue='' onChange={(e) => setBuyerData({ ...buyerData, name: e.target.value })} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formGroupPhone">
-                                    <Form.Control type="text" name="phone" required placeholder="Telefono" value={buyerData.phone} onChange={(e) => setBuyerData({ ...buyerData, phone: e.target.value })} />
+                                    <Form.Control type="text" name="phone" required placeholder="Telefono" defaultValue='' onChange={(e) => setBuyerData({ ...buyerData, phone: e.target.value })} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formGroupEmail">
-                                    <Form.Control type="email" name="email" required placeholder="Email" value={buyerData.email} onChange={(e) => setBuyerData({ ...buyerData, email: e.target.value })} />
+                                    <Form.Control type="email" name="email" required placeholder="Email" defaultValue='' onChange={(e) => setBuyerData({ ...buyerData, email: e.target.value })} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formGroupAddress">
-                                    <Form.Control type="text" name="address" required placeholder="Direccion" value={buyerData.address} onChange={(e) => setBuyerData({ ...buyerData, address: e.target.value })} />
+                                    <Form.Control type="text" name="address" required placeholder="Direccion" defaultValue='' onChange={(e) => setBuyerData({ ...buyerData, address: e.target.value })} />
                                 </Form.Group>
                                 <Button variant="success" size="sm" type="submit">Generar Orden</Button>
                             </Form>

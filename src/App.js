@@ -12,6 +12,7 @@ import Checkout from './components/Checkout/Checkout';
 import { AuthProvider } from './context/AuthContext';
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
+import MyOrders from './components/MyOrders/MyOrders';
 
 
 const App = () => {
@@ -31,6 +32,7 @@ const App = () => {
                 <Route path='/checkout' element={<Checkout />} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
+                <Route path='/myorders' element={<MyOrders />} />
               </Routes>
               <Footer />
             </CartProvider>

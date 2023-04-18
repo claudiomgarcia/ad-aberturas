@@ -37,10 +37,28 @@ export const useOrders = () => {
         } catch (error) {
             return error
         }
-
     }
+
+    const getOrdersByUser = async (id) => {
+        try {
+            const ordersRef = collection(db, 'orders')
+
+            const ordersSnapshot = await getDocs(query(ordersRef, where('buyerId', '==', id)))
+            const { docs } = ordersSnapshot
+
+            const ordersFormatted = docs.map(doc => {
+                return { id: doc.id, ...doc.data() }
+            })
+
+            return ordersFormatted
+        } catch (error) {
+            return error
+        }
+    }
+
     return {
-        createOrder
+        createOrder,
+        getOrdersByUser
     }
 }
 
