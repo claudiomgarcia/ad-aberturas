@@ -2,7 +2,7 @@ import { db } from "../firebaseConfig"
 import { documentId, getDocs, query, collection, where, writeBatch, addDoc } from "firebase/firestore"
 
 export const useOrders = () => {
-    const createOrder = async (objOrder,cart) => {
+    const createOrder = async (objOrder, cart) => {
         try {
             const ids = cart.map(prod => prod.id)
             const productRef = query(collection(db, 'products'), where(documentId(), 'in', ids))
@@ -42,15 +42,12 @@ export const useOrders = () => {
     const getOrdersByUser = async (id) => {
         try {
             const ordersRef = collection(db, 'orders')
-
             const ordersSnapshot = await getDocs(query(ordersRef, where('buyerId', '==', id)))
             const { docs } = ordersSnapshot
-
-            const ordersFormatted = docs.map(doc => {
+            const ordersAdapted = docs.map(doc => {
                 return { id: doc.id, ...doc.data() }
             })
-
-            return ordersFormatted
+            return ordersAdapted
         } catch (error) {
             return error
         }
@@ -61,4 +58,3 @@ export const useOrders = () => {
         getOrdersByUser
     }
 }
-

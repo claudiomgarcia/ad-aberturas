@@ -20,7 +20,7 @@ const ItemDetailContainer = () => {
 
     if (error) {
         return (
-            <div className="text-center">
+            <div className="text-center pt-5">
                 <h2>Ocurrió un error en la carga del producto</h2>
             </div>
         )
