@@ -13,6 +13,7 @@ import { AuthProvider } from './context/AuthContext';
 import Login from './components/Login/Login'
 import Register from './components/Register/Register'
 import MyOrders from './components/MyOrders/MyOrders';
+import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 
 
 const App = () => {
@@ -28,11 +29,11 @@ const App = () => {
                 <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Productos filtrados por categoria'} />} />
                 <Route path='/category/:categoryId/subcategory/:subcategoryId' element={<ItemListContainer greeting={'Productos filtrados por categoria'} />} />
                 <Route path='/item/:itemId' element={<ItemDetailContainer />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/checkout' element={<Checkout />} />
+                <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+                <Route path='/checkout' element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
                 <Route path='/login' element={<Login />} />
                 <Route path='/register' element={<Register />} />
-                <Route path='/myorders' element={<MyOrders />} />
+                <Route path='/myorders' element={<ProtectedRoute><MyOrders /></ProtectedRoute>} />
               </Routes>
               <Footer />
             </CartProvider>
