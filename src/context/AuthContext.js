@@ -7,11 +7,10 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthP
 const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState()
     const navigate = useNavigate()
     const { setNotification } = useNotification()
-
-
+    
     const register = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -30,8 +29,7 @@ export const AuthProvider = ({ children }) => {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);
-                setUser({ user })
+                setUser(user)
                 navigate('/')
                 setNotification('success', `Bienvenido ${user.displayName || user.email}`, 3)
             })
